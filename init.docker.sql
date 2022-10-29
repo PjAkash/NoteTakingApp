@@ -1,1 +1,1 @@
-create database "note taker"
+create database "note_taker"

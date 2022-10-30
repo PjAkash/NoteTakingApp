@@ -1,22 +1,18 @@
 const { Pool } = require('pg')
 // import { Pool } from 'pg'
+const {connectionString} = require('./constants')
 
-const init = async () => {
     const pool = new Pool({
-      user: 'postgres',
-      host: '192.168.29.85',
-      database: 'note_taker',
-      password: 'postgres',
-      port: 5430,
+      connectionString: connectionString
     })
     
-    await pool
-      .connect()
-      .then(client => {
-        console.log("pass");
-        client.release();
-      })
-      .catch(err => { throw err })
+    // await pool
+    //   .connect()
+    //   .then(client => {
+    //     console.log("pass");
+    //     client.release();
+    //   })
+    //   .catch(err => { throw err })
 
     // client
     //   .query('SELECT NOW()')
@@ -30,9 +26,4 @@ const init = async () => {
     //     client.release();
     //   })
 
-    return pool;
-}
-
-
-
-exports.init = init;
+exports.db = pool

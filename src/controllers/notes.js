@@ -1,21 +1,26 @@
 const { Note } = require('./../models/notes')
 
-const createNote = (req, res) => {
+const createNote = async (req, res) => {
 
-    const note = new Note(undefined, req.body.title, req.body.content);
+    const note = new Note({title: req.body.title, content: req.body.content});
 
-    note.store();
+    await note.store()
+        .catch((e) => {
+            console.log(e)
+            res.status(400).send({error: e.message})
+        })
 
-    res.send(req.body)
+    res.sendStatus(200)
 }
 
 const getNote = async (req, res) => {
     
-    const id = req.param('noteId')
+    const id = parseInt(req.params.noteId)
 
     const note = await Note.get(id)
         .catch((e) => {
-            res.status(400).send({error: e.toString()})
+            console.log(e)
+            res.status(400).send({error: e.message})
             return
         })
 

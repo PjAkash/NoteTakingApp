@@ -18,12 +18,5 @@ app.get('/', (req, res) => {
 app.listen(port, async () => {
   console.log(`Example app listening on port ${port}`)
 
-  await db
-    .init()
-    .then(cool => {
-      console.log("cool");
-    })
-    .catch(err => {
-      console.log("jamaica")
-    })
+  
 })

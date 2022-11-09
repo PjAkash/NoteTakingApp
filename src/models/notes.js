@@ -1,12 +1,10 @@
-const e = require('express');
-const { Client } = require('pg');
 const { db } = require('./../config/db')
 
 class Note {
-    constructor({id, title, content}) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
+    constructor ({ id, title, content }) {
+        this.id = id
+        this.title = title
+        this.content = content
     }
 
     store = async () => {
@@ -20,20 +18,19 @@ class Note {
                     })
             })
             .catch((e) => {
-                throw new Error('Database error', {cause: e})
+                throw new Error('Database error', { cause: e })
             })
     }
 
     static get = async (id) => {
-
-        let x = await db
+        const x = await db
             .connect()
             .then((client) => {
                 return client
                     .query('SELECT id, title, content FROM notes WHERE id=$1', [id])
-                    .then(res =>{
+                    .then(res => {
                         if (res.rowCount === 0) {
-                            throw new Error ('no rows found')
+                            throw new Error('no rows found')
                         }
                         return new Note(res.rows[0])
                     })
@@ -42,19 +39,16 @@ class Note {
                     })
             })
             .catch(e => {
-                throw new Error('Database error', {cause: e})
+                throw new Error('Database error', { cause: e })
             })
-        return x;
+        return x
 
         // if (row == undefined){
-            
+
         // }
         // let note = new Note(row.id, row.title, row.content)
         // return note;
     }
 }
 
-
-
 exports.Note = Note
-

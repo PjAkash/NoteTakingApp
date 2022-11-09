@@ -1,29 +1,29 @@
 const { Pool } = require('pg')
 // import { Pool } from 'pg'
-const {connectionString} = require('./constants')
+const { connectionString } = require('./constants')
 
-    const pool = new Pool({
-      connectionString: connectionString
-    })
-    
-    // await pool
-    //   .connect()
-    //   .then(client => {
-    //     console.log("pass");
-    //     client.release();
-    //   })
-    //   .catch(err => { throw err })
+const pool = new Pool({
+    connectionString: connectionString
+})
 
-    // client
-    //   .query('SELECT NOW()')
-    //   .then(res => {
-    //     console.log(res.rows);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    //   .then(() => {
-    //     client.release();
-    //   })
+// await pool
+//   .connect()
+// .then(client => {
+//     console.log("pass");
+//     client.release();
+//   })
+//   .catch(err => { throw err })
+
+// client
+//   .query('SELECT NOW()')
+//   .then(res => {
+//     console.log(res.rows);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+//   .then(() => {
+//     client.release();
+//   })
 
 exports.db = pool

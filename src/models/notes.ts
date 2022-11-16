@@ -1,10 +1,13 @@
-const { db } = require('./../config/db')
+import { db } from './../config/db'
 
-class Note {
-    constructor ({ id, title, content }) {
-        this.id = id
-        this.title = title
-        this.content = content
+export class Note {
+    id: number
+    title: string
+    content: string
+    constructor (note: { id: number, title: string, content: string }) {
+        this.id = note.id
+        this.title = note.title
+        this.content = note.content
     }
 
     store = async () => {
@@ -37,7 +40,7 @@ class Note {
             })
     }
 
-    static remove = async (id) => {
+    static remove = async (id: number) => {
         await db
             .connect()
             .then((client) => {
@@ -48,12 +51,12 @@ class Note {
                         client.release()
                     })
             })
-            .catch((e) => {
+            .catch((e: Error) => {
                 throw new Error('Database error', { cause: e })
             })
     }
 
-    static get = async (id) => {
+    static get = async (id: number) => {
         const x = await db
             .connect()
             .then((client) => {
@@ -69,7 +72,7 @@ class Note {
                         client.release()
                     })
             })
-            .catch(e => {
+            .catch((e: Error) => {
                 throw new Error('Database error', { cause: e })
             })
         return x
@@ -81,5 +84,3 @@ class Note {
         // return note;
     }
 }
-
-exports.Note = Note

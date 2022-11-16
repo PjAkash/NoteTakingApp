@@ -23,6 +23,8 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/pg": "^8.6.5",
     "eslint": "^8.26.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
